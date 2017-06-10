@@ -7,9 +7,36 @@
 		<dialects>
 			<language name="postgre">
 				<![CDATA[
-					SELECT *
-					FROM
-						"Questions"
+				SELECT  Questions.id,
+						Questions.question,
+        				Questions.type,
+        				SimpleAnswers.id AS answerId,
+        				SimpleAnswers.answer,
+        				SimpleAnswers.option,
+        				SimpleAnswers.isTrueAnswer
+				FROM Questions JOIN SimpleAnswers ON Questions.id = SimpleAnswers.questionId
+					]]>
+			</language>
+		</dialects>
+	</query>
+
+	<query id="insertQuestions" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-10">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				INSERT INTO Questions(question, type) VALUES (?, ?)
+					]]>
+			</language>
+		</dialects>
+	</query>
+
+	<query id="insertAnswers" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-10">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				INSERT INTO SimpleAnswers(questionId, answer, option, isTrueAnswer) VALUES (:questionId, :answer, :option, :trueAnswer)
 					]]>
 			</language>
 		</dialects>

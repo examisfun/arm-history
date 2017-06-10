@@ -1,11 +1,12 @@
 package am.armhistory.endpoint;
 
-import am.armhistory.service.ArmHistoryInternalService;
 import am.armhistory.model.Question;
+import am.armhistory.model.QuestionDto;
+import am.armhistory.service.ArmHistoryInternalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.Collection;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -21,8 +22,13 @@ public class ArmHistoryServiceController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public Set<Question> getQuestions() {
-		return armHistoryInternalService.getQuestions();
+	public Collection<Question> getQuestions() {
+		return armHistoryInternalService.loadQuestions();
+	}
+
+	@RequestMapping(value = "/saveQuestion", method = RequestMethod.POST)
+	public void saveQuestions(@RequestBody QuestionDto questionDto) {
+		armHistoryInternalService.saveQuestions(questionDto);
 	}
 
 }

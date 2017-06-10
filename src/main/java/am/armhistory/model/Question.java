@@ -1,15 +1,21 @@
 package am.armhistory.model;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Question {
 	private Integer id;
-	private String name;
+	private String question;
 	private Integer type;
+	private List<Answer> answers = new ArrayList<>();
 
-	public Question(Integer id, String name, Integer type) {
+	public Question(Integer id, String question, Integer type) {
 		this.id = id;
-		this.name = name;
+		this.question = question;
 		this.type = type;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -19,12 +25,12 @@ public class Question {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getQuestion() {
+		return question;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setQuestion(String question) {
+		this.question = question;
 	}
 
 	public Integer getType() {
@@ -33,5 +39,13 @@ public class Question {
 
 	public void setType(Integer type) {
 		this.type = type;
+	}
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
 	}
 }

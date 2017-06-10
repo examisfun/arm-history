@@ -1,12 +1,17 @@
 package am.armhistory.service.impl;
 
-import am.armhistory.service.ArmHistoryInternalService;
 import am.armhistory.dac.ArmHistoryDao;
+import am.armhistory.model.Answer;
 import am.armhistory.model.Question;
+import am.armhistory.model.QuestionDto;
+import am.armhistory.service.ArmHistoryInternalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ArmHistoryInternalServiceImpl implements ArmHistoryInternalService {
@@ -18,7 +23,25 @@ public class ArmHistoryInternalServiceImpl implements ArmHistoryInternalService 
 		this.armHistoryDao = armHistoryDao;
 	}
 
-	public Set<Question> getQuestions() {
-		return armHistoryDao.getQuestions();
+	public Collection<Question> loadQuestions() {
+		return armHistoryDao.loadQuestions();
 	}
+
+	public void saveQuestions(QuestionDto questionDto){
+		List<Question> questions = new ArrayList<>();
+		Question question = new Question(questionDto.id, questionDto.question, 1);
+		Map<Integer, String> answerMap = questionDto.answers;
+		List<Answer> answers = new ArrayList<>();
+		for(Integer option :answerMap.keySet()){
+			Answer answer = new Answer();
+			answer.setAnswer(answerMap.get(option));
+			answer.setOption(option);
+			answer.setTrueAnswer(questionDto.rightAnswer.equals(option));
+			answers.add(answer);
+		}
+		question.setAnswers(answers);
+		questions.add(question);
+		armHistoryDao.insertQuestions(questions);
+	}
+
 }

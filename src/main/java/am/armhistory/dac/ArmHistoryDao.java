@@ -2,8 +2,9 @@ package am.armhistory.dac;
 
 import am.armhistory.model.Question;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface ArmHistoryDao {
-	Set<Question> getQuestions();
+	Collection<Question> loadQuestions();
+	void insertQuestions(Collection<Question> questions);
 }
