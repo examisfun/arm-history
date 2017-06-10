@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<Properties>
+
+		<property name="idm.org.home">home</property>
+		<property name="idm.home.resolved">${sys:idm.org.home}</property>
+		<property name="log.file.name">log</property>
+		<property name="log.file.ext">log</property>
+		<property name="log.path">${idm.org.home}/logs</property>
+	</Properties>
+	<Appenders>
+		<RollingFile name="FILE_SYNC" fileName="${log.path}/${log.file.name}.0.${log.file.ext}"
+					 filePattern="${log.path}/${log.file.name}.%i.${log.file.ext}" append="true">
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10 MB"/>
+			</Policies>
+			<DefaultRolloverStrategy max="50"/>
+		</RollingFile>
+		<Async name="FILE" includeLocation="true">
+			<AppenderRef ref="FILE_SYNC"/>
+		</Async>
+	</Appenders>
+
+	<Loggers>
+		<Logger name="com.synisys.idm.um" level="TRACE">
+			<AppenderRef ref="FILE"/>
+		</Logger>
+
+		<Root level="TRACE">
+			<AppenderRef ref="FILE"/>
+		</Root>
+	</Loggers>
+</configuration>

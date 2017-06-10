@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="queries">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="query" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="query">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="description"/>
+        <xs:element ref="params"/>
+        <xs:element ref="dialects" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="createdBy" use="required" type="xs:string"/>
+      <xs:attribute name="createdOn" use="required" type="xs:date"/>
+      <xs:attribute name="id" use="required" type="xs:token"/>
+      <xs:attribute name="modifiedBy" use="optional" type="xs:string"/>
+      <xs:attribute name="modifiedOn" use="optional" type="xs:date"/>
+      <xs:attribute name="implementedBy" use="optional" type="xs:string"/>
+      <xs:attribute name="implementedOn" use="optional" type="xs:date"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="description" type="xs:string"/>
+  <xs:element name="params">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="param" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="param">
+    <xs:complexType mixed="true">
+      <xs:attribute name="name" use="required" type="xs:string"/>
+      <xs:attribute name="type" use="optional" type="xs:token"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dialects">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="language" maxOccurs="3"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="language">
+    <xs:complexType mixed="true">
+      <xs:attribute name="name" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="mssql"/>
+            <xs:enumeration value="oracle"/>
+            <xs:enumeration value="mysql"/>
+            <xs:enumeration value="postgre"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
