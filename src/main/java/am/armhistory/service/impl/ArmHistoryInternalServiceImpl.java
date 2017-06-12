@@ -22,13 +22,23 @@ public class ArmHistoryInternalServiceImpl implements ArmHistoryInternalService 
 	}
 
 	@Override
-	public Collection<Question> loadQuestions() {
-		return armHistoryDao.loadQuestions();
+	public Collection<Subject> loadSubjects() {
+		return armHistoryDao.loadSubjects();
 	}
 
 	@Override
-	public Collection<Subject> loadSubjects() {
-		return armHistoryDao.loadSubjects();
+	public Collection<Book> loadBooksBySubjectId(Integer subjectId) {
+		return armHistoryDao.loadBooksBySubjectId(subjectId);
+	}
+
+	@Override
+	public Collection<Part> loadPartsByBookId(Integer bookId) {
+		return armHistoryDao.loadPartsByBookId(bookId);
+	}
+
+	@Override
+	public Collection<Question> loadQuestions() {
+		return armHistoryDao.loadQuestions();
 	}
 
 	@Override

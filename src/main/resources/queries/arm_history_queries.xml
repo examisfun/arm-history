@@ -68,4 +68,30 @@
 		</dialects>
 	</query>
 
+	<query id="loadBooksBySubjectId" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-12">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				SELECT bookId, subjectId, name
+				FROM books
+				WHERE subjectId = :subjectId
+					]]>
+			</language>
+		</dialects>
+	</query>
+
+	<query id="loadPartsByBookId" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-12">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				SELECT partId, bookId, name
+				FROM parts
+				WHERE bookId = :bookId
+					]]>
+			</language>
+		</dialects>
+	</query>
+
 </queries>

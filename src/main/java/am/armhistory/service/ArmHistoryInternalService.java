@@ -1,17 +1,16 @@
 package am.armhistory.service;
 
-import am.armhistory.model.Header;
-import am.armhistory.model.Question;
-import am.armhistory.model.QuestionDto;
-import am.armhistory.model.Subject;
+import am.armhistory.model.*;
 
 import java.util.Collection;
 
 public interface ArmHistoryInternalService {
 
-	Collection<Question> loadQuestions();
 	Collection<Subject> loadSubjects();
+	Collection<Book> loadBooksBySubjectId(Integer subjectId);
+	Collection<Part> loadPartsByBookId(Integer bookId);
 	Collection<Header> loadHeadersBySubjectId(Integer subjectId);
+	Collection<Question> loadQuestions();
 	void saveQuestions(QuestionDto questionDto);
 
 }

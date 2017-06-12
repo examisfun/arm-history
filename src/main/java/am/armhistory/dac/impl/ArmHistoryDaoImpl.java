@@ -2,10 +2,7 @@ package am.armhistory.dac.impl;
 
 import am.armhistory.dac.ArmHistoryDao;
 import am.armhistory.dac.DAOFactory;
-import am.armhistory.model.Answer;
-import am.armhistory.model.Header;
-import am.armhistory.model.Question;
-import am.armhistory.model.Subject;
+import am.armhistory.model.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -40,6 +37,21 @@ public class ArmHistoryDaoImpl implements ArmHistoryDao {
 	public Collection<Subject> loadSubjects(){
 		String sql = daoFactory.getQuery("loadSubjects");
 		return daoFactory.getReadJdbcTemplate().query(sql, new DaoHelper.SubjectMapper());
+	}
+
+	@Override
+	public Collection<Book> loadBooksBySubjectId(Integer subjectId) {
+		String sql = daoFactory.getQuery("loadBooksBySubjectId");
+		SqlParameterSource namedParameters = new MapSqlParameterSource("subjectId", subjectId);
+		return daoFactory.getReadJdbcTemplate().query(sql,namedParameters, new DaoHelper.BookMapper());
+	}
+
+
+	@Override
+	public Collection<Part> loadPartsByBookId(Integer bookId) {
+		String sql = daoFactory.getQuery("loadPartsByBookId");
+		SqlParameterSource namedParameters = new MapSqlParameterSource("bookId", bookId);
+		return daoFactory.getReadJdbcTemplate().query(sql,namedParameters, new DaoHelper.PartMapper());
 	}
 
 	@Override

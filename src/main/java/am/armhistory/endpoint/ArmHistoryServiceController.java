@@ -1,9 +1,6 @@
 package am.armhistory.endpoint;
 
-import am.armhistory.model.Header;
-import am.armhistory.model.Question;
-import am.armhistory.model.QuestionDto;
-import am.armhistory.model.Subject;
+import am.armhistory.model.*;
 import am.armhistory.service.ArmHistoryInternalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +30,18 @@ public class ArmHistoryServiceController {
 		return armHistoryInternalService.loadSubjects();
 	}
 
+	@RequestMapping(value = "/getBooks", method = RequestMethod.GET)
+	public Collection<Book> getBooksBySubjectId(@RequestParam Integer subjectId) {
+		return armHistoryInternalService.loadBooksBySubjectId(1);
+	}
+
+	@RequestMapping(value = "/getParts", method = RequestMethod.GET)
+	public Collection<Part> getPartsByBookId(@RequestParam Integer bookId) {
+		return armHistoryInternalService.loadPartsByBookId(1);
+	}
+
 	@RequestMapping(value = "/getHeaders", method = RequestMethod.GET)
-	public Collection<Header> getHeader(@RequestParam Integer subjectId) {
+	public Collection<Header> getHeadersBySubjectId(@RequestParam Integer subjectId) {
 		return armHistoryInternalService.loadHeadersBySubjectId(subjectId);
 	}
 
