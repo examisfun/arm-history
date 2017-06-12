@@ -42,4 +42,30 @@
 		</dialects>
 	</query>
 
+	<query id="loadSubjects" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-11">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				SELECT subjectId, name
+				FROM subjects
+					]]>
+			</language>
+		</dialects>
+	</query>
+
+
+	<query id="loadHeadersBySubjectId" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-12">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				SELECT headerId, subjectId, name
+				FROM headers
+				WHERE subjectId = :subjectId
+					]]>
+			</language>
+		</dialects>
+	</query>
+
 </queries>

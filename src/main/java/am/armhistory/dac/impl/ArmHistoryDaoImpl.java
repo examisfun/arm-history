@@ -3,11 +3,14 @@ package am.armhistory.dac.impl;
 import am.armhistory.dac.ArmHistoryDao;
 import am.armhistory.dac.DAOFactory;
 import am.armhistory.model.Answer;
+import am.armhistory.model.Header;
 import am.armhistory.model.Question;
+import am.armhistory.model.Subject;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -31,6 +34,19 @@ public class ArmHistoryDaoImpl implements ArmHistoryDao {
 	public ArmHistoryDaoImpl(DAOFactory daoFactory, DriverManagerDataSource driverManagerDataSource) {
 		this.daoFactory = daoFactory;
 		this.driverManagerDataSource = driverManagerDataSource;
+	}
+
+	@Override
+	public Collection<Subject> loadSubjects(){
+		String sql = daoFactory.getQuery("loadSubjects");
+		return daoFactory.getReadJdbcTemplate().query(sql, new DaoHelper.SubjectMapper());
+	}
+
+	@Override
+	public Collection<Header> loadHeadersBySubjectId(Integer subjectId){
+		String sql = daoFactory.getQuery("loadHeadersBySubjectId");
+		SqlParameterSource namedParameters = new MapSqlParameterSource("subjectId", subjectId);
+		return daoFactory.getReadJdbcTemplate().query(sql, namedParameters, new DaoHelper.HeaderMapper());
 	}
 
 	@Override

@@ -14,8 +14,9 @@ public class Answer {
     public Answer() {
     }
 
-    public Answer(Integer id, String answer, Integer option, Boolean isTrueAnswer) {
+    public Answer(Integer id, Integer questionId, String answer, Integer option, Boolean isTrueAnswer) {
         this.id = id;
+        this.questionId = questionId;
         this.answer = answer;
         this.option = option;
         this.isTrueAnswer = isTrueAnswer;

@@ -1,9 +1,7 @@
 package am.armhistory.service.impl;
 
 import am.armhistory.dac.ArmHistoryDao;
-import am.armhistory.model.Answer;
-import am.armhistory.model.Question;
-import am.armhistory.model.QuestionDto;
+import am.armhistory.model.*;
 import am.armhistory.service.ArmHistoryInternalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,8 +21,19 @@ public class ArmHistoryInternalServiceImpl implements ArmHistoryInternalService 
 		this.armHistoryDao = armHistoryDao;
 	}
 
+	@Override
 	public Collection<Question> loadQuestions() {
 		return armHistoryDao.loadQuestions();
+	}
+
+	@Override
+	public Collection<Subject> loadSubjects() {
+		return armHistoryDao.loadSubjects();
+	}
+
+	@Override
+	public Collection<Header> loadHeadersBySubjectId(Integer subjectId) {
+		return armHistoryDao.loadHeadersBySubjectId(subjectId);
 	}
 
 	public void saveQuestions(QuestionDto questionDto){
