@@ -2,6 +2,57 @@
 <queries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:noNamespaceSchemaLocation="Synergy-Queries-Schema-1.1.xsd">
 
+	<query id="loadSubjects" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-11">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				SELECT subjectId, name
+				FROM subjects
+					]]>
+			</language>
+		</dialects>
+	</query>
+
+	<query id="loadBooksBySubjectId" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-12">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				SELECT bookId, subjectId, name
+				FROM books
+				WHERE subjectId = :subjectId
+					]]>
+			</language>
+		</dialects>
+	</query>
+
+	<query id="loadPartsByBookId" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-12">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				SELECT parts.partid, parts.name
+				FROM parts JOIN booksparts_f ON parts.partid = booksparts_f.partid
+				WHERE bookid = :bookId
+					]]>
+			</language>
+		</dialects>
+	</query>
+
+	<query id="loadHeadersByPartId" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-12">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				SELECT headers.headerid, headers.name
+				FROM headers JOIN partsheaders_f ON headers.headerid = partsheaders_f.headerid
+				WHERE partid = :partId
+					]]>
+			</language>
+		</dialects>
+	</query>
+
 	<query id="loadQuestions" createdBy="David Voskanyan" implementedBy="David Voskanyan"
 		   createdOn="2017-06-10">
 		<dialects>
@@ -37,58 +88,6 @@
 			<language name="postgre">
 				<![CDATA[
 				INSERT INTO SimpleAnswers(questionId, answer, option, isTrueAnswer) VALUES (:questionId, :answer, :option, :trueAnswer)
-					]]>
-			</language>
-		</dialects>
-	</query>
-
-	<query id="loadSubjects" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
-		   createdOn="2017-06-11">
-		<dialects>
-			<language name="postgre">
-				<![CDATA[
-				SELECT subjectId, name
-				FROM subjects
-					]]>
-			</language>
-		</dialects>
-	</query>
-
-
-	<query id="loadHeadersBySubjectId" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
-		   createdOn="2017-06-12">
-		<dialects>
-			<language name="postgre">
-				<![CDATA[
-				SELECT headerId, subjectId, name
-				FROM headers
-				WHERE subjectId = :subjectId
-					]]>
-			</language>
-		</dialects>
-	</query>
-
-	<query id="loadBooksBySubjectId" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
-		   createdOn="2017-06-12">
-		<dialects>
-			<language name="postgre">
-				<![CDATA[
-				SELECT bookId, subjectId, name
-				FROM books
-				WHERE subjectId = :subjectId
-					]]>
-			</language>
-		</dialects>
-	</query>
-
-	<query id="loadPartsByBookId" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
-		   createdOn="2017-06-12">
-		<dialects>
-			<language name="postgre">
-				<![CDATA[
-				SELECT partId, bookId, name
-				FROM parts
-				WHERE bookId = :bookId
 					]]>
 			</language>
 		</dialects>

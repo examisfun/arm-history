@@ -8,7 +8,7 @@ public interface ArmHistoryDao {
 	Collection<Subject> loadSubjects();
 	Collection<Book> loadBooksBySubjectId(Integer subjectId);
 	Collection<Part> loadPartsByBookId(Integer bookId);
+	Collection<Header> loadHeadersByPartId(Integer partId);
 	Collection<Question> loadQuestions();
-	Collection<Header> loadHeadersBySubjectId(Integer subjectId);
 	void insertQuestions(Collection<Question> questions);
 }

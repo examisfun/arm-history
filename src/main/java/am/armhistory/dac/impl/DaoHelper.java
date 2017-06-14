@@ -22,7 +22,7 @@ final class DaoHelper {
 		@Override
 		public Book mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			return new Book(rs.getInt("bookId"), rs.getInt("subjectId"), rs.getString("name"));
+			return new Book(rs.getInt("bookId"), rs.getString("name"));
 		}
 	}
 
@@ -31,21 +31,18 @@ final class DaoHelper {
 		@Override
 		public Part mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			return new Part(rs.getInt("partId"), rs.getInt("bookId"), rs.getString("name"));
+			return new Part(rs.getInt("partId"), rs.getString("name"));
 		}
 	}
-
 
 	static class HeaderMapper
 			implements RowMapper<Header> {
 		@Override
 		public Header mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			return new Header(rs.getInt("headerId"), rs.getInt("subjectId"), rs.getString("name"));
+			return new Header(rs.getInt("headerId"), rs.getString("name"));
 		}
 	}
-
-
 
 	static class QuestionMapper
 			implements RowMapper<Question> {

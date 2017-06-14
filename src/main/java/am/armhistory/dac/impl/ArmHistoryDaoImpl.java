@@ -46,7 +46,6 @@ public class ArmHistoryDaoImpl implements ArmHistoryDao {
 		return daoFactory.getReadJdbcTemplate().query(sql,namedParameters, new DaoHelper.BookMapper());
 	}
 
-
 	@Override
 	public Collection<Part> loadPartsByBookId(Integer bookId) {
 		String sql = daoFactory.getQuery("loadPartsByBookId");
@@ -55,9 +54,9 @@ public class ArmHistoryDaoImpl implements ArmHistoryDao {
 	}
 
 	@Override
-	public Collection<Header> loadHeadersBySubjectId(Integer subjectId){
-		String sql = daoFactory.getQuery("loadHeadersBySubjectId");
-		SqlParameterSource namedParameters = new MapSqlParameterSource("subjectId", subjectId);
+	public Collection<Header> loadHeadersByPartId(Integer partId){
+		String sql = daoFactory.getQuery("loadHeadersByPartId");
+		SqlParameterSource namedParameters = new MapSqlParameterSource("partId", partId);
 		return daoFactory.getReadJdbcTemplate().query(sql, namedParameters, new DaoHelper.HeaderMapper());
 	}
 

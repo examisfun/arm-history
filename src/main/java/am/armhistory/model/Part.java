@@ -5,16 +5,11 @@ package am.armhistory.model;
  */
 public class Part {
     private Integer partId;
-    private Integer bookId;
     private String name;
 
-    public Part(Integer partId, Integer bookId, String name) {
+    public Part(Integer partId, String name) {
         this.partId = partId;
-        this.bookId = bookId;
         this.name = name;
-    }
-
-    public Part() {
     }
 
     public Integer getPartId() {
@@ -23,14 +18,6 @@ public class Part {
 
     public void setPartId(Integer partId) {
         this.partId = partId;
-    }
-
-    public Integer getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
     }
 
     public String getName() {

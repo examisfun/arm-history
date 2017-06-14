@@ -43,7 +43,7 @@ public class ArmHistoryInternalServiceImpl implements ArmHistoryInternalService 
 
 	@Override
 	public Collection<Header> loadHeadersBySubjectId(Integer subjectId) {
-		return armHistoryDao.loadHeadersBySubjectId(subjectId);
+		return armHistoryDao.loadHeadersByPartId(subjectId);
 	}
 
 	public void saveQuestions(QuestionDto questionDto){

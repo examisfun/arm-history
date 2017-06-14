@@ -32,17 +32,17 @@ public class ArmHistoryServiceController {
 
 	@RequestMapping(value = "/getBooks", method = RequestMethod.GET)
 	public Collection<Book> getBooksBySubjectId(@RequestParam Integer subjectId) {
-		return armHistoryInternalService.loadBooksBySubjectId(1);
+		return armHistoryInternalService.loadBooksBySubjectId(subjectId);
 	}
 
 	@RequestMapping(value = "/getParts", method = RequestMethod.GET)
 	public Collection<Part> getPartsByBookId(@RequestParam Integer bookId) {
-		return armHistoryInternalService.loadPartsByBookId(1);
+		return armHistoryInternalService.loadPartsByBookId(bookId);
 	}
 
 	@RequestMapping(value = "/getHeaders", method = RequestMethod.GET)
-	public Collection<Header> getHeadersBySubjectId(@RequestParam Integer subjectId) {
-		return armHistoryInternalService.loadHeadersBySubjectId(subjectId);
+	public Collection<Header> getHeadersByPartId(@RequestParam Integer partId) {
+		return armHistoryInternalService.loadHeadersBySubjectId(partId);
 	}
 
 	@RequestMapping(value = "/saveQuestion", method = RequestMethod.POST)
