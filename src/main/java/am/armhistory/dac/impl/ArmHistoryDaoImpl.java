@@ -5,20 +5,12 @@ import am.armhistory.dac.DAOFactory;
 import am.armhistory.model.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collection;
 
 @Repository
 public class ArmHistoryDaoImpl implements ArmHistoryDao {
@@ -60,6 +52,7 @@ public class ArmHistoryDaoImpl implements ArmHistoryDao {
 		return daoFactory.getReadJdbcTemplate().query(sql, namedParameters, new DaoHelper.HeaderMapper());
 	}
 
+/*
 	@Override
 	public Collection<Question> loadQuestions() {
 		String sql = daoFactory.getQuery("loadQuestions");
@@ -88,6 +81,7 @@ public class ArmHistoryDaoImpl implements ArmHistoryDao {
 		}
 		return questions;
 	}
+*/
 
 /*	public void insertQuestions(Collection<Question> questions){
 		NamedParameterJdbcTemplate jdbcTemplate = daoFactory.getWriteJdbcTemplate();
@@ -100,7 +94,7 @@ public class ArmHistoryDaoImpl implements ArmHistoryDao {
 		insertAnswers(answers);
 	}*/
 
-	public void insertAnswers(Collection<Answer> answers){
+/*	public void insertAnswers(Collection<Answer> answers){
 		NamedParameterJdbcTemplate jdbcTemplate = daoFactory.getWriteJdbcTemplate();
 		String sql = daoFactory.getQuery("insertAnswers");
 		List<SqlParameterSource> parameters = answers.stream().map(BeanPropertySqlParameterSource::new).collect(Collectors.toList());
@@ -138,7 +132,17 @@ public class ArmHistoryDaoImpl implements ArmHistoryDao {
 			logger.error(e.getMessage());
 			throw new RuntimeException(e);
 		}
+	}*/
+
+
+	@Override
+	public Collection<Question> loadQuestions() {
+		String sql = daoFactory.getQuery("loadQuestions");
+		return daoFactory.getReadJdbcTemplate().query(sql, new DaoHelper.QuestionMapper());
 	}
 
+	@Override
+	public void insertQuestions(Collection<Question> questions) {
 
+	}
 }

@@ -58,14 +58,8 @@
 		<dialects>
 			<language name="postgre">
 				<![CDATA[
-				SELECT  Questions.id,
-						Questions.question,
-        				Questions.type,
-        				SimpleAnswers.id AS answerId,
-        				SimpleAnswers.answer,
-        				SimpleAnswers.option,
-        				SimpleAnswers.isTrueAnswer
-				FROM Questions JOIN SimpleAnswers ON Questions.id = SimpleAnswers.questionId
+				SELECT *
+				FROM Questions
 					]]>
 			</language>
 		</dialects>

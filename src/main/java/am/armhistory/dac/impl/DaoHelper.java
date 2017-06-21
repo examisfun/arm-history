@@ -1,8 +1,10 @@
 package am.armhistory.dac.impl;
 
+import am.armhistory.dac.helper.FieldsJsonConverter;
 import am.armhistory.model.*;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -49,7 +51,20 @@ final class DaoHelper {
 		@Override
 		public Question mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			return new Question(rs.getInt("id"), rs.getString("question"), rs.getInt("type"));
+			Question question = new Question();
+			question.setQuestionId(rs.getInt("questionId"));
+			question.setBookId(rs.getInt("bookId"));
+			question.setPartId(rs.getInt("partId"));
+			question.setHeaderId(rs.getInt("headerId"));
+			question.setQuestionNumber(rs.getInt("questionNumber"));
+			question.setType(rs.getInt("type"));
+			FieldsJsonConverter converter = new FieldsJsonConverter();
+			try {
+				question.setQuestion(converter.convertToEntityAttribute(rs.getObject("question")));
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+			return question;
 		}
 	}
 
