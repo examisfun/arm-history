@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<queries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:noNamespaceSchemaLocation="Synergy-Queries-Schema-1.1.xsd">
+
+	<query id="checkEmailAvailability" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-22">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				SELECT CASE WHEN EXISTS (
+                    SELECT *
+                    FROM Users
+                    WHERE email = :email
+                 )
+                 THEN CAST(1 AS BIT)
+                 ELSE CAST(0 AS BIT) END AS isAvailable
+					]]>
+			</language>
+		</dialects>
+	</query>
+
+	<query id="checkLoginAvailability" createdBy="Gevorg Minasyan" implementedBy="Gevorg Minasyan"
+		   createdOn="2017-06-22">
+		<dialects>
+			<language name="postgre">
+				<![CDATA[
+				SELECT CASE WHEN EXISTS (
+                    SELECT *
+                    FROM Users
+                    WHERE login = :login
+                 )
+                 THEN CAST(1 AS BIT)
+                 ELSE CAST(0 AS BIT) END AS isAvailable
+					]]>
+			</language>
+		</dialects>
+	</query>
+
+</queries>

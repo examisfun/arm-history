@@ -15,28 +15,40 @@
 
 
     <bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="org.postgresql.Driver"/>
-    <property name="url" value="jdbc:postgresql://localhost:5432/arm-history"/>
-    <property name="username" value="postgres"/>
-    <property name="password" value="123456"/>
-    <!--<property name="socketTimeout" value="10"/>-->
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/smart-testing"/>
+        <property name="username" value="postgres"/>
+        <property name="password" value="1111"/>
+        <!--<property name="socketTimeout" value="10"/>-->
 
-    <property name="connectionProperties">
-    <props>
-    <prop key="socketTimeout">10</prop>
-    </props>
-    </property>
+        <property name="connectionProperties">
+            <props>
+                <prop key="socketTimeout">10</prop>
+            </props>
+        </property>
     </bean>
 
     <bean id="daoFactory" class="am.armhistory.dac.DAOFactory" depends-on="sqlQueries">
-    <constructor-arg name="driverManagerDataSource" ref="driverManagerDataSource"/>
-    <constructor-arg name="sqlQueries" ref="sqlQueries"/>
+        <constructor-arg name="driverManagerDataSource" ref="driverManagerDataSource"/>
+        <constructor-arg name="sqlQueries" ref="sqlQueries"/>
     </bean>
 
     <bean id="sqlQueries" class="am.armhistory.dac.queries.SQLQueries">
-    <constructor-arg name="dbType" value="POSTGRE"/>
-    <constructor-arg name="filePath" value="/queries/arm_history_queries.xml"/>
+        <constructor-arg name="dbType" value="POSTGRE"/>
+        <constructor-arg name="filePath" value="/queries/arm_history_queries.xml"/>
     </bean>
+
+    <!-- =================================START Authentication  ==============================-->
+    <bean id="authenticationSqlQueries" class="am.armhistory.dac.queries.SQLQueries">
+        <constructor-arg name="dbType" value="POSTGRE"/>
+        <constructor-arg name="filePath" value="/queries/authentication_queries.xml"/>
+    </bean>
+
+    <bean id="authenticationDaoFactory" class="am.armhistory.dac.DAOFactory" depends-on="authenticationSqlQueries">
+        <constructor-arg name="driverManagerDataSource" ref="driverManagerDataSource"/>
+        <constructor-arg name="sqlQueries" ref="authenticationSqlQueries"/>
+    </bean>
+    <!-- =================================END Authentication  ==============================-->
 </beans>
 
 
