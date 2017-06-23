@@ -1,5 +1,6 @@
 package am.armhistory.authentication.dao;
 
+import am.armhistory.authentication.model.UserDto;
 import am.armhistory.dac.DAOFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -37,5 +38,10 @@ public class AuthenticationDaoImpl implements AuthenticationDao {
             rs.next();
             return rs.getBoolean("isAvailable");
         });
+    }
+
+    @Override
+    public void saveUser(UserDto userDto) {
+
     }
 }

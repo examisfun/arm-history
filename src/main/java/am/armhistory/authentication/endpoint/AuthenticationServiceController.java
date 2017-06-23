@@ -1,5 +1,7 @@
 package am.armhistory.authentication.endpoint;
 
+import am.armhistory.authentication.model.UserDto;
+import am.armhistory.authentication.model.UserValidationResultDto;
 import am.armhistory.authentication.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,21 +15,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/authentication")
 public class AuthenticationServiceController {
 
-    private final AuthenticationService authenticationService;
+	private final AuthenticationService authenticationService;
 
-    @Autowired
-    public AuthenticationServiceController(AuthenticationService authenticationService) {
-        this.authenticationService = authenticationService;
-    }
+	@Autowired
+	public AuthenticationServiceController(AuthenticationService authenticationService) {
+		this.authenticationService = authenticationService;
+	}
 
-    @RequestMapping(value = "/checkEmail", method = RequestMethod.GET)
-    public boolean checkEmailAvailability(@RequestParam  String email){
-        return authenticationService.checkEmailAvailability(email);
-    }
+	@RequestMapping(value = "/checkEmail", method = RequestMethod.GET)
+	public boolean checkEmailAvailability(@RequestParam String email) {
+		return authenticationService.checkEmailAvailability(email);
+	}
 
-    @RequestMapping(value = "/checkLogin", method = RequestMethod.GET)
-    public boolean checkLoginAvailability(@RequestParam String login){
-        return authenticationService.checkLoginAvailability(login);
-    }
+	@RequestMapping(value = "/checkLogin", method = RequestMethod.GET)
+	public boolean checkLoginAvailability(@RequestParam String login) {
+		return authenticationService.checkLoginAvailability(login);
+	}
+
+	@RequestMapping(value = "/saveuser", method = RequestMethod.POST)
+	@ResponseBody
+	public UserValidationResultDto saveUser(@RequestBody UserDto userDto) {
+		return this.authenticationService.saveUser(userDto);
+	}
 
 }
